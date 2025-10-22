@@ -7,6 +7,7 @@ import { TopNav } from "@/components/top-nav";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
 import { SettingsProvider } from "@/contexts/settings-context"; // Import SettingsProvider
+import { ClerkProvider } from '@clerk/nextjs'
 import type React from "react";
 
 const audiowide = Audiowide({
@@ -37,8 +38,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${audiowide.variable} font-sans antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ConvexClientProvider>
+        <ClerkProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ConvexClientProvider>
             {/* Move SettingsProvider to wrap TooltipProvider and the main layout */}
             <SettingsProvider>
               <TooltipProvider delayDuration={0}>
@@ -55,8 +57,9 @@ export default function RootLayout({
                 </div>
               </TooltipProvider>
             </SettingsProvider>
-          </ConvexClientProvider>
-        </ThemeProvider>
+            </ConvexClientProvider>
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
