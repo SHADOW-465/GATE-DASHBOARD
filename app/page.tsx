@@ -111,7 +111,7 @@ export default function Dashboard() {
             Welcome back, {user?.firstName || 'Student'}!
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Ready to ace GATE 2026? Let's make today count.
+            Ready to ace GATE 2026? Let&apos;s make today count.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export default function Dashboard() {
               </div>
               <div className="text-center">
                 <div className="text-sm text-gray-600 dark:text-gray-400 italic">
-                  "{randomQuote}"
+                  &ldquo;{randomQuote}&rdquo;
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
-                Today's Schedule
+                Today&apos;s Schedule
               </CardTitle>
             </CardHeader>
             <CardContent>
