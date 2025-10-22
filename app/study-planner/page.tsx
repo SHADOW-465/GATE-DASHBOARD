@@ -3,6 +3,7 @@
 import { useUser } from '@clerk/nextjs'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
 import { useState } from 'react'
 import { 
   Calendar, 
@@ -71,10 +72,10 @@ export default function StudyPlanner() {
     try {
       await createTask({
         title,
-        subjectId: subjectId as any,
-        type: type as any,
+        subjectId: subjectId as Id<"subjects">,
+        type: type as "Theory" | "PYQs" | "Mock Test" | "Revision",
         status: 'pending',
-        priority: priority as any,
+        priority: priority as "high" | "medium" | "low",
         dueDate: dueDate || undefined
       })
       
@@ -95,7 +96,7 @@ export default function StudyPlanner() {
 
   const handleUpdateTaskStatus = async (taskId: string, status: 'pending' | 'completed' | 'revise-again') => {
     try {
-      await updateTaskStatus({ taskId: taskId as any, status })
+      await updateTaskStatus({ taskId: taskId as Id<"tasks">, status })
       toast({
         title: "Task updated",
         description: `Task marked as ${status}.`,
@@ -111,7 +112,7 @@ export default function StudyPlanner() {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      await deleteTask({ taskId: taskId as any })
+      await deleteTask({ taskId: taskId as Id<"tasks"> })
       toast({
         title: "Task deleted",
         description: "Task has been removed.",
