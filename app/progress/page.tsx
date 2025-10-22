@@ -334,7 +334,7 @@ export default function ProgressTracker() {
           <CardHeader>
             <CardTitle>Weekly Review</CardTitle>
             <CardDescription>
-              Summary of this week's performance
+              Summary of this week&apos;s performance
             </CardDescription>
           </CardHeader>
           <CardContent>
