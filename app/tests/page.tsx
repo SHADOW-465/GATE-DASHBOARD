@@ -3,6 +3,7 @@
 import { useUser } from '@clerk/nextjs'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
 import { useState } from 'react'
 import { 
   BookOpen, 
@@ -71,7 +72,7 @@ export default function TestsAndPractice() {
     try {
       const testId = await createTest({
         name: `${testType} Test - ${new Date().toLocaleDateString()}`,
-        type: testType as any,
+        type: testType as "Full Length" | "Subject Test" | "PYQ",
         status: 'not_attempted'
       })
 
@@ -91,7 +92,7 @@ export default function TestsAndPractice() {
   const handleLogResult = async (testId: string, score: number, accuracy: number) => {
     try {
       await logTestResult({
-        testId: testId as any,
+        testId: testId as Id<"tests">,
         score,
         accuracy,
         status: 'attempted'
