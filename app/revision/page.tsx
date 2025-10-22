@@ -3,6 +3,7 @@
 import { useUser } from '@clerk/nextjs'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
 import { useState } from 'react'
 import { 
   Brain, 
@@ -53,7 +54,7 @@ export default function RevisionHub() {
 
   // Fetch flashcards for selected deck
   const flashcards = useQuery(api.revision.getFlashcards, 
-    selectedDeck ? { deckId: selectedDeck as any } : "skip"
+    selectedDeck ? { deckId: selectedDeck as Id<"flashcardDecks"> } : "skip"
   )
 
   // Fetch weak topics
@@ -80,7 +81,7 @@ export default function RevisionHub() {
     try {
       await createFlashcardDeck({
         name,
-        subjectId: subjectId as any
+        subjectId: subjectId as Id<"subjects">
       })
       
       toast({
@@ -106,7 +107,7 @@ export default function RevisionHub() {
 
     try {
       await createFlashcard({
-        deckId: selectedDeck as any,
+        deckId: selectedDeck as Id<"flashcardDecks">,
         front,
         back,
         masteryLevel: 'new'
@@ -130,7 +131,7 @@ export default function RevisionHub() {
   const handleRateCard = async (cardId: string, masteryLevel: 'new' | 'learning' | 'mastered') => {
     try {
       await updateFlashcard({
-        flashcardId: cardId as any,
+        flashcardId: cardId as Id<"flashcards">,
         masteryLevel
       })
       
@@ -197,7 +198,7 @@ export default function RevisionHub() {
                 
                 <div className="space-y-2">
                   <div className="p-3 rounded-lg border">
-                    <div className="font-medium">Ohm's Law</div>
+                    <div className="font-medium">Ohm&apos;s Law</div>
                     <div className="text-sm text-gray-600">V = I × R</div>
                     <div className="text-xs text-gray-500">Network Theory</div>
                   </div>
